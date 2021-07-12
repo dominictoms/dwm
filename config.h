@@ -1,7 +1,10 @@
 /* See LICENSE file for copyright and license details. */
 
+/* for audio and brightness keys */
+#include <X11/XF86keysym.h>
+
 /* appearance */
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
+static const unsigned int borderpx  = 0;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
@@ -16,11 +19,6 @@ static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
 	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
-};
-
-static const char *const autostart[] = {
-	"st", NULL,
-	NULL /* terminate */
 };
 
 /* tagging */
@@ -49,7 +47,7 @@ static const Layout layouts[] = {
 };
 
 /* key definitions */
-#define MODKEY Mod1Mask
+#define MODKEY Mod4Mask
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
@@ -62,12 +60,27 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *termcmd[]  = { "st", NULL };
+static const char *termcmd[]  = { "kitty", NULL };
+static const char *ffoxcmd[]  = { "firefox", NULL };
+static const char *discordcmd[]  = { "discord", NULL };
+static const char *spotifycmd[]  = { "discord", NULL };
+static const char *prtscrncmd[]  = { "import", "png:-", "|", "xclip", "-selection", "clipboard", "-t" "image/png", NULL };
+
+/* for audio and brightness keys */
+static const char *upvol[]   = { "/usr/bin/pactl", "set-sink-volume", "0", "+5%",     NULL };
+static const char *downvol[] = { "/usr/bin/pactl", "set-sink-volume", "0", "-5%",     NULL };
+static const char *mutevol[] = { "/usr/bin/pactl", "set-sink-mute",   "0", "toggle",  NULL };
+static const char *light_up[] = {"/usr/bin/xbacklight", "-inc", "10", NULL};
+static const char *light_down[] = {"/usr/bin/xbacklight", "-dec", "10", NULL};
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY|ShiftMask,             XK_f,      spawn,          {.v = ffoxcmd } },
+	{ MODKEY|ShiftMask,             XK_d,      spawn,          {.v = discordcmd } },
+	{ MODKEY|ShiftMask,             XK_s,      spawn,          {.v = spotifycmd } },
+	{ MODKEY|ShiftMask,             XK_p,      spawn,          {.v = prtscrncmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -99,6 +112,11 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+	{ 0,                            XF86XK_AudioRaiseVolume, spawn, {.v = upvol   } },
+	{ 0,                            XF86XK_AudioLowerVolume, spawn, {.v = downvol } },
+	{ 0,                            XF86XK_AudioMute, spawn, {.v = mutevol } },
+	{ 0,                            XF86XK_MonBrightnessUp, spawn, {.v = light_up} },
+	{ 0,                            XF86XK_MonBrightnessDown, spawn, {.v = light_down} },
 };
 
 /* button definitions */
@@ -118,3 +136,9 @@ static Button buttons[] = {
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
 };
 
+/* cool autostart */
+static const char *const autostart[] = {
+	"feh", "--bg-scale", "/home/dom/Documents/wallpaper.png", NULL,
+	"slstatus", NULL,
+	NULL
+};
