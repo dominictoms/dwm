@@ -21,6 +21,14 @@ static const char *colors[][3]      = {
 	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
 };
 
+/* cool autostart */
+static const char *const autostart[] = {
+	"xcompmgr", NULL,
+	"feh", "--bg-scale", "/home/dom/Documents/wallpaper.png", NULL,
+	"slstatus", NULL,
+	NULL
+};
+
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
@@ -30,9 +38,7 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
-	{ "UnityHub", NULL,       NULL,       0,            1,           -1 },
+	{ NULL,       NULL,       NULL,       0,            False,       -1 },
 };
 
 /* layout(s) */
@@ -64,8 +70,8 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *termcmd[]  = { "kitty", NULL };
 static const char *ffoxcmd[]  = { "firefox", NULL };
 static const char *discordcmd[]  = { "discord", NULL };
-static const char *spotifycmd[]  = { "discord", NULL };
-static const char *prtscrncmd[]  = { "import", "png:-", "|", "xclip", "-selection", "clipboard", "-t" "image/png", NULL };
+static const char *spotifycmd[]  = { "spotify", NULL };
+static const char *prtscrncmd[]  = { "sh", "-c", "import png:- | xclip -selection clipboard -t image/png", NULL };
 
 /* for audio and brightness keys */
 static const char *upvol[]   = { "/usr/bin/pactl", "set-sink-volume", "0", "+5%",     NULL };
@@ -135,11 +141,4 @@ static Button buttons[] = {
 	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
-};
-
-/* cool autostart */
-static const char *const autostart[] = {
-	"feh", "--bg-scale", "/home/dom/Documents/wallpaper.png", NULL,
-	"slstatus", NULL,
-	NULL
 };
