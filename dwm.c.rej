@@ -1,0 +1,17 @@
+diff a/dwm.c b/dwm.c	(rejected hunks)
+@@ -1248,6 +1251,7 @@ propertynotify(XEvent *e)
+ void
+ quit(const Arg *arg)
+ {
++	if(arg->i) restart = 1;
+ 	running = 0;
+ }
+ 
+@@ -2139,6 +2160,7 @@ main(int argc, char *argv[])
+ 	setup();
+ 	scan();
+ 	run();
++	if(restart) execvp(argv[0], argv);
+ 	cleanup();
+ 	XCloseDisplay(dpy);
+ 	return EXIT_SUCCESS;
