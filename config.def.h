@@ -21,14 +21,6 @@ static const char *colors[][3]      = {
 	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
 };
 
-/* cool autostart */
-static const char *const autostart[] = {
-	"xcompmgr", NULL,
-	"feh", "--bg-scale", "/home/dom/Documents/wallpaper.png", NULL,
-	"dwmblocks", NULL,
-	NULL
-};
-
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
@@ -38,13 +30,14 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ NULL,       NULL,       NULL,       0,            False,       -1 },
+    { NULL,       NULL,       NULL,       0,            False,       -1 },
 };
 
 /* layout(s) */
 static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
+static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
@@ -54,7 +47,7 @@ static const Layout layouts[] = {
 };
 
 /* key definitions */
-#define MODKEY Mod4Mask
+#define MODKEY Mod1Mask
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
@@ -71,7 +64,6 @@ static const char *termcmd[]  = { "kitty", NULL };
 static const char *ffoxcmd[]  = { "firefox-nightly", NULL };
 static const char *discordcmd[]  = { "discord-canary", NULL };
 static const char *spotifycmd[]  = { "spotify", NULL };
-static const char *emacscmd[]  = { "emacs", NULL };
 static const char *prtscrncmd[]  = { "sh", "-c", "import png:- | xclip -selection clipboard -t image/png", NULL };
 
 /* for audio and brightness keys */
@@ -85,11 +77,10 @@ static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY|ShiftMask,             XK_f,      spawn,          {.v = ffoxcmd } },
-	{ MODKEY|ShiftMask,             XK_d,      spawn,          {.v = discordcmd } },
-	{ MODKEY|ShiftMask,             XK_s,      spawn,          {.v = spotifycmd } },
-	{ MODKEY|ShiftMask,             XK_e,      spawn,          {.v = emacscmd } },
-	{ MODKEY|ShiftMask,             XK_p,      spawn,          {.v = prtscrncmd } },
+    { MODKEY|ShiftMask,             XK_f,      spawn,          {.v = ffoxcmd } },
+    { MODKEY|ShiftMask,             XK_d,      spawn,          {.v = discordcmd } },
+    { MODKEY|ShiftMask,             XK_s,      spawn,          {.v = spotifycmd } },
+    { MODKEY|ShiftMask,             XK_p,      spawn,          {.v = prtscrncmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -121,11 +112,11 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
-	{ 0,                            XF86XK_AudioRaiseVolume, spawn, {.v = upvol   } },
-	{ 0,                            XF86XK_AudioLowerVolume, spawn, {.v = downvol } },
-	{ 0,                            XF86XK_AudioMute, spawn, {.v = mutevol } },
-	{ 0,                            XF86XK_MonBrightnessUp, spawn, {.v = light_up} },
-	{ 0,                            XF86XK_MonBrightnessDown, spawn, {.v = light_down} },
+    { 0,                            XF86XK_AudioRaiseVolume, spawn, {.v = upvol   } },
+    { 0,                            XF86XK_AudioLowerVolume, spawn, {.v = downvol } },
+    { 0,                            XF86XK_AudioMute, spawn, {.v = mutevol } },
+    { 0,                            XF86XK_MonBrightnessUp, spawn, {.v = light_up} },
+    { 0,                            XF86XK_MonBrightnessDown, spawn, {.v = light_down} },
 };
 
 /* button definitions */
@@ -144,3 +135,4 @@ static Button buttons[] = {
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
 };
+
