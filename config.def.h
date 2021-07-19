@@ -69,17 +69,17 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "kitty", NULL };
 static const char *ffoxcmd[]  = { "firefox-nightly", NULL };
-static const char *discordcmd[]  = { "discord-ptb", NULL };
+static const char *discordcmd[]  = { "discord-canary", NULL };
 static const char *spotifycmd[]  = { "spotify", NULL };
 static const char *emacscmd[]  = { "emacs", NULL };
 static const char *prtscrncmd[]  = { "sh", "-c", "import png:- | xclip -selection clipboard -t image/png", NULL };
 
 /* for audio and brightness keys */
-static const char *upvol[]   = { "sh", "-c", "/usr/bin/pactl set-sink-volume @DEFAULT_SINK@ +5%; pkill -RTMIN+1 dwmblocks",   NULL };
-static const char *downvol[] = { "sh", "-c", "/usr/bin/pactl set-sink-volume @DEFAULT_SINK@ -5%; pkill -RTMIN+1 dwmblocks",   NULL };
-static const char *mutevol[] = { "sh", "-c", "/usr/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle; pkill -RTMIN+1 dwmblocks",  NULL };
-static const char *light_up[] = {"/usr/bin/xbacklight", "-inc", "10", NULL};
-static const char *light_down[] = {"/usr/bin/xbacklight", "-dec", "10", NULL};
+static const char *upvol[]   = { "sh", "-c", "pactl set-sink-volume @DEFAULT_SINK@ +5%; pkill -RTMIN+1 dwmblocks", NULL };
+static const char *downvol[] = { "sh", "-c", "pactl set-sink-volume @DEFAULT_SINK@ -5%; pkill -RTMIN+1 dwmblocks", NULL };
+static const char *mutevol[] = { "sh", "-c", "pactl set-sink-mute @DEFAULT_SINK@ toggle; pkill -RTMIN+1 dwmblocks", NULL };
+static const char *light_up[] = { "sh", "-c", "xbacklight -inc 5 -time 0; pkill -RTMIN+2 dwmblocks", NULL };
+static const char *light_down[] = { "sh", "-c", "xbacklight -dec 5 -time 0; pkill -RTMIN+2 dwmblocks", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
