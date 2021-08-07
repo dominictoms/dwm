@@ -10,15 +10,15 @@ static const int showbar           = 1; /* 0 means no bar */
 static const int topbar            = 1; /* 0 means bottom bar */
 static const char *fonts[]         = { "Roboto Mono:size=9" };
 static const char dmenufont[]      = "Roboto Mono:size=9";
-static const char gray1[]          = "#373737";
-static const char gray2[]          = "#000000";
-static const char gray3[]          = "#c8c8c8";
-static const char gray4[]          = "#ffffff";
+static const char grey1[]          = "#373737";
+static const char grey2[]          = "#000000";
+static const char grey3[]          = "#c8c8c8";
+static const char grey4[]          = "#ffffff";
 static const char black[]          = "#000000";
 static const char *colors[][3]     = {
 	/*               fg      bg      border */
-	[SchemeNorm] = { gray3,  gray1,  gray2 },
-	[SchemeSel]  = { gray4,  black,  black  },
+	[SchemeNorm] = { grey3,  grey1,  grey2 },
+	[SchemeSel]  = { grey4,  black,  black  },
 };
 
 /* tagging */
@@ -49,25 +49,22 @@ static const Layout layouts[] = {
 	{ MODKEY|ShiftMask,              KEY,  tag,         {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask|ShiftMask,  KEY,  toggletag,   {.ui = 1 << TAG} },
 
-/* helper for spawning shell commands in the pre dwm-5.0 fashion */
-#define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
-
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[]   = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", gray1, "-nf", gray3, "-sb", black, "-sf", gray4, NULL };
+static const char *dmenucmd[]   = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", grey1, "-nf", grey3, "-sb", black, "-sf", grey4, NULL };
 static const char *termcmd[]    = { "kitty", NULL };
 static const char *firefoxcmd[] = { "firefox", NULL };
 static const char *discordcmd[] = { "dbus-launch", "flatpak", "run", "com.discordapp.Discord", NULL };
 static const char *spotifycmd[] = { "dbus-launch", "flatpak", "run", "com.spotify.Client", NULL };
 static const char *unitycmd[]   = { "dbus-launch", "flatpak", "run", "com.unity.UnityHub", NULL };
-static const char *prtscrncmd[] = { "sh", "-c", "import png:- | xclip -selection clipboard -t image/png", NULL };
+static const char *prtscrncmd[] = { "/bin/sh", "-c", "import png:- | xclip -selection clipboard -t image/png", NULL };
 
 /* for audio and brightness keys */
-static const char *volup[]     = { "sh", "-c", "pactl set-sink-volume @DEFAULT_SINK@ +5%; pkill -RTMIN+1 dwmblocks", NULL };
-static const char *voldown[]   = { "sh", "-c", "pactl set-sink-volume @DEFAULT_SINK@ -5%; pkill -RTMIN+1 dwmblocks", NULL };
-static const char *volmute[]   = { "sh", "-c", "pactl set-sink-mute @DEFAULT_SINK@ toggle; pkill -RTMIN+1 dwmblocks", NULL };
-static const char *lightup[]   = { "sh", "-c", "xbacklight -inc 5 -time 0; pkill -RTMIN+2 dwmblocks", NULL };
-static const char *lightdown[] = { "sh", "-c", "xbacklight -dec 5 -time 0; pkill -RTMIN+2 dwmblocks", NULL };
+static const char *volup[]     = { "/bin/sh", "-c", "pactl set-sink-volume @DEFAULT_SINK@ +5%; pkill -RTMIN+1 dwmblocks", NULL };
+static const char *voldown[]   = { "/bin/sh", "-c", "pactl set-sink-volume @DEFAULT_SINK@ -5%; pkill -RTMIN+1 dwmblocks", NULL };
+static const char *volmute[]   = { "/bin/sh", "-c", "pactl set-sink-mute @DEFAULT_SINK@ toggle; pkill -RTMIN+1 dwmblocks", NULL };
+static const char *lightup[]   = { "/bin/sh", "-c", "xbacklight -inc 5 -time 0; pkill -RTMIN+2 dwmblocks", NULL };
+static const char *lightdown[] = { "/bin/sh", "-c", "xbacklight -dec 5 -time 0; pkill -RTMIN+2 dwmblocks", NULL };
 
 static Key keys[] = {
 	/* modifier          key         function         argument */
