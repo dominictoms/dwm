@@ -9,7 +9,7 @@ static const unsigned int snap     = 8; /* snap pixel */
 static const int showbar           = 1; /* 0 means no bar */
 static const int topbar            = 1; /* 0 means bottom bar */
 static const char *fonts[]         = { "Roboto Mono:size=9" };
-static const char dmenufont[]      = "Rovoto Mono:size=9";
+static const char dmenufont[]      = "Roboto Mono:size=9";
 static const char gray1[]          = "#373737";
 static const char gray2[]          = "#000000";
 static const char gray3[]          = "#c8c8c8";
