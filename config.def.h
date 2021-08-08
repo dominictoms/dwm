@@ -55,9 +55,9 @@ static const char *dmenucmd[]   = { "dmenu_run", "-m", dmenumon, "-fn", dmenufon
 static const char *termcmd[]    = { "kitty", NULL };
 static const char *firefoxcmd[] = { "firefox", NULL };
 static const char *thunarcmd[]  = { "thunar", NULL };
-static const char *discordcmd[] = { "dbus-launch", "flatpak", "run", "com.discordapp.Discord", NULL };
-static const char *spotifycmd[] = { "dbus-launch", "flatpak", "run", "com.spotify.Client", NULL };
-static const char *unitycmd[]   = { "dbus-launch", "flatpak", "run", "com.unity.UnityHub", NULL };
+static const char *discordcmd[] = { "discord", NULL };
+static const char *spotifycmd[] = { "spotify", NULL };
+static const char *unitycmd[]   = { "unityhub", NULL };
 static const char *prtscrncmd[] = { "/bin/sh", "-c", "import png:- | xclip -selection clipboard -t image/png", NULL };
 
 /* for audio and brightness keys */
