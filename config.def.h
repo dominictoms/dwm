@@ -17,7 +17,7 @@ static const char black[]          = "#000000";
 static const char *colors[][3]     = {
 	/*               fg      bg      border */
 	[SchemeNorm] = { grayl,  grayd,  black },
-	[SchemeSel]  = { white,  black,  black  },
+	[SchemeSel]  = { white,  black,  black },
 };
 
 /* tagging */
