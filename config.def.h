@@ -55,6 +55,7 @@ static const char *termcmd[]    = { "kitty", NULL };
 static const char *firefoxcmd[] = { "firefox", NULL };
 static const char *discordcmd[] = { "discord", NULL };
 static const char *spotifycmd[] = { "spotify", NULL };
+static const char *lockcmd[]    = { "lockscreen", NULL };
 static const char *prtscrncmd[] = { "/bin/sh", "-c", "import png:- | xclip -selection clipboard -t image/png", NULL };
 
 /* for audio and brightness keys */
@@ -71,6 +72,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,  XK_f,       spawn,           {.v = firefoxcmd } },
 	{ MODKEY|ShiftMask,  XK_d,       spawn,           {.v = discordcmd } },
 	{ MODKEY|ShiftMask,  XK_s,       spawn,           {.v = spotifycmd } },
+	{ MODKEY|ShiftMask,  XK_l,       spawn,           {.v = lockcmd } },
  	{ MODKEY|ShiftMask,  XK_p,       spawn,           {.v = prtscrncmd } },
 	{ MODKEY,            XK_b,       togglebar,       {0} },
 	{ MODKEY,            XK_j,       focusstack,      {.i = +1 } },
