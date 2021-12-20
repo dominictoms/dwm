@@ -23,8 +23,8 @@ static const char *colors[][3]     = {
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 static const Rule rules[] = {
-	/* class  instance  title  tags  floating  monitor */
-	{ NULL,   NULL,     NULL,  0,    False,    -1 },
+	/* class      instance  title  tags  floating  monitor */
+	{ "lsclock",  NULL,     NULL,  0,    True,     -1 },
 };
 
 /* layout(s) */
@@ -49,14 +49,14 @@ static const Layout layouts[] = {
 	{ MODKEY|ControlMask|ShiftMask,  KEY,  toggletag,   {.ui = 1 << TAG} },
 
 /* commands */
-static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
+static char dmenumon[2]         = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[]   = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", grayd, "-nf", grayl, "-sb", black, "-sf", white, NULL };
 static const char *termcmd[]    = { "kitty", NULL };
 static const char *firefoxcmd[] = { "firefox", NULL };
 static const char *discordcmd[] = { "discord", NULL };
 static const char *spotifycmd[] = { "spotify", NULL };
 static const char *lockcmd[]    = { "lockscreen", NULL };
-static const char *prtscrncmd[] = { "/bin/sh", "-c", "import png:- | xclip -selection clipboard -t image/png", NULL };
+static const char *prtscrncmd[] = { "screenshot", NULL };
 
 /* for audio and brightness keys */
 static const char *volup[]     = { "/bin/sh", "-c", "pactl set-sink-volume @DEFAULT_SINK@ +5%; pkill -RTMIN+1 dwmblocks", NULL };
@@ -114,17 +114,9 @@ static Key keys[] = {
 
 /* button definitions */
 static Button buttons[] = {
-	/* click          event    button    function         argument */
-	{ ClkLtSymbol,    0,       Button1,  setlayout,       {0} },
-	{ ClkLtSymbol,    0,       Button3,  setlayout,       {.v = &layouts[2]} },
-	{ ClkWinTitle,    0,       Button2,  zoom,            {0} },
-	{ ClkStatusText,  0,       Button2,  spawn,           {.v = termcmd } },
-	{ ClkClientWin,   MODKEY,  Button1,  movemouse,       {0} },
-	{ ClkClientWin,   MODKEY,  Button2,  togglefloating,  {0} },
-	{ ClkClientWin,   MODKEY,  Button3,  resizemouse,     {0} },
-	{ ClkTagBar,      0,       Button1,  view,            {0} },
-	{ ClkTagBar,      0,       Button3,  toggleview,      {0} },
-	{ ClkTagBar,      MODKEY,  Button1,  tag,             {0} },
-	{ ClkTagBar,      MODKEY,  Button3,  toggletag,       {0} },
+	/* click         event    button    function         argument */
+	{ ClkClientWin,  MODKEY,  Button1,  movemouse,       {0} },
+	{ ClkClientWin,  MODKEY,  Button2,  togglefloating,  {0} },
+	{ ClkClientWin,  MODKEY,  Button3,  resizemouse,     {0} },
 };
 
